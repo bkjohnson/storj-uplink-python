@@ -9,16 +9,9 @@
 name: Upload Python Package
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
-  schedule:
-    - cron: "0 0 * * *"
-# on:
-#   pull_request:
-#   release:
-#     types: [published]
+  release:
+    types: [published]
 
 permissions:
   contents: read
