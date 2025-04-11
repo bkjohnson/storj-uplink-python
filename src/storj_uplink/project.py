@@ -1,15 +1,15 @@
 """Module with Project class and project methods to work with buckets and objects"""
 import ctypes
 
-from module_classes import ListBucketsOptions, ListObjectsOptions,\
+from .module_classes import ListBucketsOptions, ListObjectsOptions,\
     UploadOptions, DownloadOptions
-from module_def import _BucketStruct, _ObjectStruct, _ListObjectsOptionsStruct,\
+from .module_def import _BucketStruct, _ObjectStruct, _ListObjectsOptionsStruct,\
     _ObjectResult, _ListBucketsOptionsStruct, _UploadOptionsStruct, _DownloadOptionsStruct,\
     _ProjectStruct, _BucketResult, _BucketIterator, _ObjectIterator, _DownloadResult,\
     _UploadResult, _Error
-from upload import Upload
-from download import Download
-from errors import _storj_exception
+from .upload import Upload
+from .download import Download
+from .errors import _storj_exception
 
 
 class Project:

@@ -3,9 +3,9 @@
 import ctypes
 import os
 
-from module_def import _DownloadStruct, _ReadResult, _ProjectStruct,\
+from .module_def import _DownloadStruct, _ReadResult, _ProjectStruct,\
     _ObjectResult, _Error
-from errors import _storj_exception
+from .errors import _storj_exception
 
 _WINDOWS = os.name == 'nt'
 COPY_BUFSIZE = 1024 * 1024 if _WINDOWS else 64 * 1024

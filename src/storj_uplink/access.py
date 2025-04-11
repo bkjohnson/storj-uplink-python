@@ -2,12 +2,12 @@
 import ctypes
 import hashlib
 
-from module_classes import Permission, SharePrefix, Config
-from module_def import _ConfigStruct, _PermissionStruct, _SharePrefixStruct, \
+from .module_classes import Permission, SharePrefix, Config
+from .module_def import _ConfigStruct, _PermissionStruct, _SharePrefixStruct, \
     _AccessStruct, _ProjectResult, _StringResult, _AccessResult, _EncryptionKeyResult,\
     _EncryptionKeyStruct
-from project import Project
-from errors import _storj_exception
+from .project import Project
+from .errors import _storj_exception
 
 
 class Access:
