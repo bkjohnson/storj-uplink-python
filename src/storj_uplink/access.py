@@ -175,6 +175,27 @@ class Access:
                                    project_result.error.contents.message.decode("utf-8"))
         return Project(project_result.project, self.uplink)
 
+    def satellite_address(self):
+        """
+        function gets URL for satellite from the access grant.
+
+        Returns
+        -------
+        String
+        """
+        #
+        # declare types of arguments and response of the corresponding golang function
+        self.uplink.m_libuplink.uplink_access_satellite_address.argtypes = [ctypes.POINTER(_AccessStruct)]
+        self.uplink.m_libuplink.uplink_access_satellite_address.restype = _StringResult
+
+        string_result = self.uplink.m_libuplink.uplink_access_satellite_address(self.access)
+
+        if bool(string_result.error):
+            raise _storj_exception(string_result.error.contents.code,
+                                   string_result.error.contents.message.decode("utf-8"))
+        return string_result.string.decode("utf-8")
+
+
     def serialize(self):
         """
         function serializes an access grant such that it can be used later
