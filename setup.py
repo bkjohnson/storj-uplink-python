@@ -8,6 +8,14 @@
 """
 
 from setuptools import setup
+from setuptools.dist import Distribution
+
+
+class BinaryDistribution(Distribution):
+    """Distribution which always forces a binary package with platform name"""
+    def has_ext_modules(foo):
+        return True
+
 
 if __name__ == "__main__":
     try:
@@ -16,7 +24,8 @@ if __name__ == "__main__":
             use_scm_version={"version_scheme": "no-guess-dev"},
             package_data={
                 '':['libuplink.so']
-            }
+            },
+            distclass=BinaryDistribution
         )
     except:  # noqa
         print(
