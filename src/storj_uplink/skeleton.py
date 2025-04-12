@@ -28,7 +28,7 @@ from storj_uplink import __version__
 
 __author__ = "Brooks Johnson"
 __copyright__ = "Brooks Johnson"
-__license__ = "MIT"
+__license__ = "Apache-2"
 
 _logger = logging.getLogger(__name__)
 
