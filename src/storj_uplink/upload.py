@@ -159,7 +159,7 @@ class Upload:
             raise _storj_exception(error.contents.code,
                                    error.contents.message.decode("utf-8"))
 
-    def set_custom_metadata(self, custom_metadata: CustomMetadata = None):
+    def set_custom_metadata(self, custom_metadata: CustomMetadata):
         """
         function to set custom meta information while uploading data
 

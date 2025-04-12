@@ -153,7 +153,7 @@ class Project:
                                    bucket_result.error.contents.message.decode("utf-8"))
         return self.uplink.bucket_from_result(bucket_result.bucket)
 
-    def list_buckets(self, list_bucket_options: ListBucketsOptions = None):
+    def list_buckets(self, list_bucket_options: ListBucketsOptions | None = None):
         """
         function returns a list of buckets with all its information.
 
@@ -277,7 +277,7 @@ class Project:
                                    object_result.error.contents.message.decode("utf-8"))
         return self.uplink.object_from_result(object_result.object)
 
-    def list_objects(self, bucket_name: str, list_object_options: ListObjectsOptions = None):
+    def list_objects(self, bucket_name: str, list_object_options: ListObjectsOptions | None = None):
         """
         function returns a list of objects with all its information.
 
@@ -392,7 +392,7 @@ class Project:
                                    error.contents.message.decode("utf-8"))
 
     def upload_object(self, bucket_name: str, storj_path: str,
-                      upload_options: UploadOptions = None):
+                      upload_options: UploadOptions | None = None):
         """
         function starts an upload to the specified key.
 
@@ -434,7 +434,7 @@ class Project:
         return Upload(upload_result.upload, self.uplink)
 
     def download_object(self, bucket_name: str, storj_path: str,
-                        download_options: DownloadOptions = None):
+                        download_options: DownloadOptions | None = None):
         """
         function starts download to the specified key.
 
