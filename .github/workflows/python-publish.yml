@@ -25,6 +25,10 @@ jobs:
         with:
           submodules: recursive
           fetch-tags: true
+          # fetch-depth:0 is set because we need the tags in order to derive the version
+          # due to how pyscaffold set things up, but there is apparently a bug with fetch-tags.
+          # https://github.com/actions/checkout/issues/1471
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
