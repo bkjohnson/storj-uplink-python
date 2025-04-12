@@ -26,7 +26,7 @@ if __name__ == "__main__":
             include_package_data=True,
             use_scm_version={"version_scheme": "no-guess-dev"},
             package_data={
-                '':['libuplink.so']
+                '':['libuplink.so', 'py.typed']
             },
             # distclass=BinaryDistribution
         )
