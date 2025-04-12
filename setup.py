@@ -11,6 +11,9 @@ from setuptools import setup
 from setuptools.dist import Distribution
 
 
+# TODO: Consider re-enabling the distclass and/or looking into cibuildwheel
+# in order to make sure that package works on the right platform
+#
 # class BinaryDistribution(Distribution):
 #     """Distribution which always forces a binary package with platform name"""
 #     def has_ext_modules(foo):
