@@ -11,10 +11,13 @@ from setuptools import setup
 from setuptools.dist import Distribution
 
 
-class BinaryDistribution(Distribution):
-    """Distribution which always forces a binary package with platform name"""
-    def has_ext_modules(foo):
-        return True
+# TODO: Consider re-enabling the distclass and/or looking into cibuildwheel
+# in order to make sure that package works on the right platform
+#
+# class BinaryDistribution(Distribution):
+#     """Distribution which always forces a binary package with platform name"""
+#     def has_ext_modules(foo):
+#         return True
 
 
 if __name__ == "__main__":
@@ -25,7 +28,7 @@ if __name__ == "__main__":
             package_data={
                 '':['libuplink.so']
             },
-            distclass=BinaryDistribution
+            # distclass=BinaryDistribution
         )
     except:  # noqa
         print(
