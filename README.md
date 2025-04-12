@@ -5,23 +5,27 @@
 [![ReadTheDocs](https://readthedocs.org/projects/storj-uplink/badge/?version=latest)](https://storj-uplink.readthedocs.io/en/stable/)
 [![Coveralls](https://img.shields.io/coveralls/github/<USER>/storj-uplink/main.svg)](https://coveralls.io/r/<USER>/storj-uplink)
 [![PyPI-Server](https://img.shields.io/pypi/v/storj-uplink.svg)](https://pypi.org/project/storj-uplink/)
-[![Conda-Forge](https://img.shields.io/conda/vn/conda-forge/storj-uplink.svg)](https://anaconda.org/conda-forge/storj-uplink)
 [![Monthly Downloads](https://pepy.tech/badge/storj-uplink/month)](https://pepy.tech/project/storj-uplink)
-[![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Twitter)](https://twitter.com/storj-uplink)
 -->
 
 [![Project generated with PyScaffold](https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold)](https://pyscaffold.org/)
 
 # storj-uplink
 
-> Add a short description here!
+> A python library for interacting with the [Storj][storj] network
 
-A longer description of your project goes here...
+This project is based on the [`uplink-python` repository][uplink-python]. Some key differences are:
 
+1. This package uses the latest version of [uplink-c] rather than be locked to version 1.2.2
+1. The binaries will be prebuilt and included with the distribution
+   - This means that any downstream consumer won't have to have go and gcc installed
 
-<!-- pyscaffold-notes -->
+This is still in the early stages and under active development.
 
 ## Note
 
 This project has been set up using PyScaffold 4.6. For details and usage
 information on PyScaffold see https://pyscaffold.org/.
+
+[uplink-python]: https://github.com/storj-thirdparty/uplink-python
+[storj]: https://www.storj.io/

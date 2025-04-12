@@ -4,7 +4,7 @@ from storj_uplink.skeleton import fib, main
 
 __author__ = "Brooks Johnson"
 __copyright__ = "Brooks Johnson"
-__license__ = "MIT"
+__license__ = "Apache-2"
 
 
 def test_fib():
