@@ -288,7 +288,7 @@ class CustomMetadata:
         converts python class object to python dictionary
     """
 
-    def __init__(self, entries: [CustomMetadataEntry] = None, count: int = 0):
+    def __init__(self, entries: list[CustomMetadataEntry] | None = None, count: int = 0):
         """Constructs all the necessary attributes for the CustomMetadata object."""
 
         self.entries = entries
@@ -340,8 +340,8 @@ class Object:
         converts python class object to python dictionary
     """
 
-    def __init__(self, key: str = "", is_prefix: bool = False, system: SystemMetadata = None,
-                 custom: CustomMetadata = None):
+    def __init__(self, key: str = "", is_prefix: bool = False, system: SystemMetadata | None = None,
+                 custom: CustomMetadata   | None = None):
         """Constructs all the necessary attributes for the Object object."""
 
         self.key = key

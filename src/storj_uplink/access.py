@@ -220,7 +220,7 @@ class Access:
                                    string_result.error.contents.message.decode("utf-8"))
         return string_result.string.decode("utf-8")
 
-    def share(self, permission: Permission = None, shared_prefix: [SharePrefix] = None):
+    def share(self, permission: Permission | None = None, shared_prefix: list[SharePrefix] | None = None):
         """
         function Share creates a new access grant with specific permissions.
 
