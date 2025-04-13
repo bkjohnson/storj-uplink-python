@@ -28,6 +28,7 @@ jobs:
           branch: v3.21
           packages: >
             build-base
+            git
             go
             python3
             py3-pip
