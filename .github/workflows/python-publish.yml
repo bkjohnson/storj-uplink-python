@@ -9,6 +9,7 @@
 name: Upload Python Package
 
 on:
+  pull_request:
   release:
     types: [published]
 
@@ -50,10 +51,15 @@ jobs:
         env:
           GOFLAGS: "-buildvcs=false"
 
-      - name: Build release distributions
-        run: |
-          python -m build
-        shell: alpine.sh --root {0}
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.23.2
+        env:
+          CIBW_BUILD_VERBOSITY: 1
+
+      # - name: Build release distributions
+      #   run: |
+      #     python -m build
+      #     shell: alpine.sh --root {0}
 
       - name: Upload distributions
         uses: actions/upload-artifact@v4
@@ -61,10 +67,37 @@ jobs:
           name: release-dists
           path: dist/
 
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # macos-13 is an intel runner, macos-14 is apple silicon
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.23.2
+        # env:
+        #   CIBW_SOME_OPTION: value
+        #   ...
+        # with:
+        #   package-dir: .
+        #   output-dir: wheelhouse
+        #   config-file: "{package}/pyproject.toml"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
+          path: ./wheelhouse/*.whl
+
   pypi-publish:
     runs-on: ubuntu-latest
     needs:
       - release-build
+      # - Build wheels on ubuntu-latest
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
@@ -72,7 +105,7 @@ jobs:
     # Dedicated environments with protections for publishing are strongly recommended.
     # For more information, see: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-protection-rules
     environment:
-      name: pypi
+      name: testpypi
       # OPTIONAL: uncomment and update to include your PyPI project URL in the deployment status:
       # url: https://pypi.org/p/YOURPROJECT
       #
@@ -91,4 +124,5 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist/
+          repository-url: https://test.pypi.org/legacy/
           verbose: true

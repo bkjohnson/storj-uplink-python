@@ -7,28 +7,33 @@
     Learn more under: https://pyscaffold.org/
 """
 
-from setuptools import setup
+from setuptools import Extension, setup
 from setuptools.dist import Distribution
+import os
 
-
-# TODO: Consider re-enabling the distclass and/or looking into cibuildwheel
-# in order to make sure that package works on the right platform
-#
-# class BinaryDistribution(Distribution):
-#     """Distribution which always forces a binary package with platform name"""
-#     def has_ext_modules(foo):
-#         return True
+class BinaryDistribution(Distribution):
+    """Distribution which always forces a binary package with platform name"""
+    def has_ext_modules(foo):
+        return True
 
 
 if __name__ == "__main__":
     try:
+        dir_path = os.path.dirname(os.path.realpath(__file__))
         setup(
             include_package_data=True,
             use_scm_version={"version_scheme": "no-guess-dev"},
             package_data={
-                '':['libuplink.so', 'py.typed']
+                'storj_uplink':['py.typed']
             },
-            # distclass=BinaryDistribution
+            ext_modules = [
+                Extension(
+                    name="m_uplink",
+                    sources = [],
+                    extra_objects=[f"{dir_path}/src/storj_uplink/libuplink.so"]
+                )
+            ],
+            distclass=BinaryDistribution
         )
     except:  # noqa
         print(
