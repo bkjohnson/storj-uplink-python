@@ -44,6 +44,8 @@ jobs:
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.23.2
+        env:
+          CIBW_BUILD_VERBOSITY: 1
 
       # - name: Build release distributions
       #   run: |
@@ -55,6 +57,7 @@ jobs:
         with:
           name: release-dists
           path: dist/
+
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
