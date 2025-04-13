@@ -34,12 +34,6 @@ jobs:
             py3-build
             make
 
-      - id: go-cache-paths
-        run: |
-          echo "go-build=$(go env GOCACHE)" >> "$GITHUB_OUTPUT"
-          echo "go-mod=$(go env GOMODCACHE)" >> "$GITHUB_OUTPUT"
-        shell: alpine.sh --root {0}
-
       - uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -48,20 +42,6 @@ jobs:
           # due to how pyscaffold set things up, but there is apparently a bug with fetch-tags.
           # https://github.com/actions/checkout/issues/1471
           fetch-depth: 0
-
-        # Cache go build cache, used to speedup go test
-      - name: Go Build Cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.go-cache-paths.outputs.go-build }}
-          key: ${{ runner.os }}-go-build-${{ hashFiles('**/go.sum') }}
-
-      # Cache go mod cache, used to speedup builds
-      - name: Go Mod Cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.go-cache-paths.outputs.go-mod }}
-          key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
 
       - name: Build C bindings
         run: |
