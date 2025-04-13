@@ -59,9 +59,9 @@ jobs:
     strategy:
       matrix:
         os: [
-            linux-intel,
-            linux-arm,
-            # windows-latest,
+            ubuntu-latest,
+            ubuntu-24.04-arm,
+            windows-latest,
             # macos-13,
             # macos-latest,
           ]
