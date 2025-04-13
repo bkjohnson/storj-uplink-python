@@ -29,6 +29,7 @@ jobs:
           packages: >
             build-base
             go
+            python
             make
 
       - uses: actions/checkout@v4
@@ -40,9 +41,9 @@ jobs:
           # https://github.com/actions/checkout/issues/1471
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
+      # - uses: actions/setup-python@v5
+      #   with:
+      #     python-version: "3.x"
 
       # - uses: actions/setup-go@v5
       #   with:
