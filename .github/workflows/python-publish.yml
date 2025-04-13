@@ -20,6 +20,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup Alpine Linux v3.15 for aarch64
+        uses: jirutka/setup-alpine@v1
+        with:
+          arch: aarch64
+          branch: v3.15
+
       - uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -40,11 +46,13 @@ jobs:
       - name: Build C bindings
         run: |
           make build-bindings
+        shell: alpine.sh {0}
 
       - name: Build release distributions
         run: |
           python -m pip install build
           python -m build
+        shell: alpine.sh {0}
 
       - name: Upload distributions
         uses: actions/upload-artifact@v4
