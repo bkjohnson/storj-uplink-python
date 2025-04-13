@@ -80,6 +80,8 @@ jobs:
         run: |
           make build-bindings
         shell: alpine.sh --root {0}
+        env:
+          GOFLAGS: -buildvcs=false
 
       - name: Build release distributions
         run: |
