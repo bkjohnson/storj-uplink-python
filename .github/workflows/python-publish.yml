@@ -30,6 +30,7 @@ jobs:
             build-base
             go
             python3
+            py3-pip
             make
 
       - uses: actions/checkout@v4
