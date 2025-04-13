@@ -7,9 +7,9 @@
     Learn more under: https://pyscaffold.org/
 """
 
-from setuptools import setup
+from setuptools import Extension, setup
 from setuptools.dist import Distribution
-
+import os
 
 class BinaryDistribution(Distribution):
     """Distribution which always forces a binary package with platform name"""
@@ -19,12 +19,20 @@ class BinaryDistribution(Distribution):
 
 if __name__ == "__main__":
     try:
+        dir_path = os.path.dirname(os.path.realpath(__file__))
         setup(
             include_package_data=True,
             use_scm_version={"version_scheme": "no-guess-dev"},
             package_data={
-                'storj_uplink':['libuplink.so', 'py.typed']
+                'storj_uplink':['py.typed']
             },
+            ext_modules = [
+                Extension(
+                    name="m_uplink",
+                    sources = [],
+                    extra_objects=[f"{dir_path}/src/storj_uplink/libuplink.so"]
+                )
+            ],
             distclass=BinaryDistribution
         )
     except:  # noqa

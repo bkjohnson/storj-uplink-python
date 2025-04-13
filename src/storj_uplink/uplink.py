@@ -4,6 +4,8 @@ import ctypes
 import os
 import sysconfig
 
+import m_libuplink
+
 from .access import Access
 from .errors import _storj_exception, LibUplinkSoError
 from .module_def import _AccessResult, _ConfigStruct
@@ -36,20 +38,21 @@ class Uplink:
         """Constructs all the necessary attributes for the Uplink object."""
         # private members of PyStorj class with reference objects
         # include the golang exported libuplink library functions
-        if Uplink.__instance is None:
-            so_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'libuplink.so')
-            if os.path.exists(so_path):
-                self.m_libuplink = ctypes.CDLL(so_path)
-            else:
-                new_path = os.path.join(sysconfig.get_paths()['purelib'], "uplink_python",
-                                        'libuplinkc.so')
-                if os.path.exists(new_path):
-                    self.m_libuplink = ctypes.CDLL(so_path)
-                else:
-                    raise LibUplinkSoError
-            Uplink.__instance = self
-        else:
-            self.m_libuplink = Uplink.__instance.m_libuplink
+        self.m_libuplink = m_libuplink
+        # if Uplink.__instance is None:
+        #     so_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'libuplink.so')
+        #     if os.path.exists(so_path):
+        #         self.m_libuplink = ctypes.CDLL(so_path)
+        #     else:
+        #         new_path = os.path.join(sysconfig.get_paths()['purelib'], "uplink_python",
+        #                                 'libuplinkc.so')
+        #         if os.path.exists(new_path):
+        #             self.m_libuplink = ctypes.CDLL(so_path)
+        #         else:
+        #             raise LibUplinkSoError
+        #     Uplink.__instance = self
+        # else:
+        #     self.m_libuplink = Uplink.__instance.m_libuplink
 
     @classmethod
     def object_from_result(cls, object_):
