@@ -39,6 +39,7 @@ jobs:
         run: |
           echo "go-build=$(go env GOCACHE)" >> "$GITHUB_OUTPUT"
           echo "go-mod=$(go env GOMODCACHE)" >> "$GITHUB_OUTPUT"
+        shell: alpine.sh --root {0}
 
       - uses: actions/checkout@v4
         with:
