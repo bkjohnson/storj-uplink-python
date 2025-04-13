@@ -43,6 +43,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.24.2"
+        shell: alpine.sh --root {0}
 
       - name: Install make for Alpine
         run: |
