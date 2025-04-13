@@ -68,12 +68,7 @@ class Upload:
         #
         # prepare the inputs for the function
         # --------------------------------------------
-        # data conversion to type required by function
-        # get size of data in c type int32 variable
-        # conversion of read bytes data to c type ubyte Array
-        data_to_write = (ctypes.c_uint8 * ctypes.c_int32(len(data_to_write)).value)(*data_to_write)
-        # conversion of c type ubyte Array to LP_c_ubyte required by upload write function
-        data_to_write_ptr = ctypes.cast(data_to_write, ctypes.POINTER(ctypes.c_uint8))
+        data_to_write_ptr = ctypes.POINTER(ctypes.c_uint8)
         # --------------------------------------------
         size_to_write_obj = ctypes.c_size_t(size_to_write)
 
@@ -159,7 +154,7 @@ class Upload:
             raise _storj_exception(error.contents.code,
                                    error.contents.message.decode("utf-8"))
 
-    def set_custom_metadata(self, custom_metadata: CustomMetadata = None):
+    def set_custom_metadata(self, custom_metadata: CustomMetadata):
         """
         function to set custom meta information while uploading data
 
